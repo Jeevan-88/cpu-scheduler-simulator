@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CPU Scheduling Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @keyframes fadeIn {
@@ -26,23 +27,23 @@
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
         }
         .gantt-block {
-            display: inline-flex;
-            align-items: center;
-            padding: 0.6rem 1.2rem;
-            margin: 0.3rem;
-            border-radius: 0.5rem;
-            background: linear-gradient(135deg, #f87171, #fb923c);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            color: white;
-            font-weight: 600;
-            transition: transform 0.3s ease;
-        }
+    display: inline-flex;
+    align-items: center;
+    padding: 0.6rem 1.2rem;
+    margin: 0.3rem;
+    border-radius: 0.5rem;
+    background: linear-gradient(135deg, #06b6d4, #1e40af);
+    color: white;
+    font-weight: 600;
+    transition: transform 0.3s ease;
+}
+        
         .gantt-block:hover {
             transform: scale(1.1);
             animation: bounce 0.5s infinite;
         }
         body {
-            background: linear-gradient(120deg, #ffedd5, #f9a8d4);
+            background: linear-gradient(120deg, #e0f7fa, #0288d1);
         }
         .btn-primary {
            background: linear-gradient(to right, #a855f7, #3b82f6);
@@ -64,17 +65,17 @@
 </head>
 <body class="min-h-screen font-sans text-gray-900">
     <div class="container mx-auto p-8 md:p-12">
-        <!-- Header -->
+       
         <header class="text-center mb-16">
-            <h1 class="text-5xl md:text-6xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-orange-500 to-pink-500">
-                CPU Scheduling Visualizer
-                <span class="block text-xl font-medium text-gray-600 mt-2">Where Efficiency Meets Energy</span>
-            </h1>
+            <h1 class="text-5xl md:text-6xl font-bold tracking-normal bg-clip-text text-transparent bg-gradient-to-r from-cyan-600 to-blue-800" style="font-family: 'Poppins', sans-serif;">
+    CPU Scheduling Visualizer
+    <span class="block text-xl font-medium text-cyan-900 mt-2">Optimizing Processes</span>
+</h1>
         </header>
 
-        <!-- Input Form -->
+   
         <section class="card p-8 rounded-2xl mb-16">
-            <h2 class="text-3xl font-bold text-gray-900 mb-8 bg-clip-text text-transparent bg-gradient-to-r from-orange-400 to-pink-400">Craft Your Simulation</h2>
+            <h2 class="text-3xl font-bold text-gray-900 mb-8 bg-clip-text text-transparent bg-gradient-to-r from-cyan-500 to-blue-700">Craft Your Simulation</h2>
             
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
                 <div>
@@ -102,22 +103,24 @@
             
             <div id="processInputs" class="space-y-6 mt-10"></div>
             
-            <button onclick="calculate()" class="mt-10 w-full btn-secondary text-white px-8 py-4 rounded-lg text-lg font-semibold">Launch Simulation</button>
+            <button onclick="calculate()" class="mt-10 w-full text-white px-8 py-4 rounded-lg text-lg font-semibold" style="background: linear-gradient(to right, #06b6d4, #1e40af);">
+    Launch Simulation
+</button>
         </section>
 
-        <!-- Results -->
+    
         <section id="results" class="hidden card p-8 rounded-2xl">
-            <h2 class="text-3xl font-bold text-gray-900 mb-8 bg-clip-text text-transparent bg-gradient-to-r from-orange-400 to-pink-400">Simulation Breakdown</h2>
+            <h2 class="text-3xl font-bold text-gray-900 mb-8 bg-clip-text text-transparent bg-gradient-to-r from-cyan-500 to-blue-700">Simulation Breakdown</h2>
             
-            <div class="overflow-x-auto bg-white p-6 rounded-xl shadow-inner">
-                <table id="resultTable" class="w-full text-left">
-                    <thead id="tableHead" class="bg-orange-50 text-orange-800"></thead>
-                    <tbody id="resultBody" class="text-gray-700"></tbody>
-                </table>
-            </div>
+            <div class="overflow-x-auto bg-cyan-50 p-6 rounded-xl shadow-inner">
+    <table id="resultTable" class="w-full text-left">
+        <thead id="tableHead" class="bg-cyan-100 text-cyan-800"></thead>
+        <tbody id="resultBody" class="text-gray-700"></tbody>
+    </table>
+</div>
             
             <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
-                <p id="avgWT" class="text-lg font-semibold bg-orange-50 p-4 rounded-lg text-orange-800"></p>
+                <p id="avgWT" class="text-lg font-semibold bg-cyan-100 p-4 rounded-lg text-cyan-800"></p>
                 <p id="avgTAT" class="text-lg font-semibold bg-teal-50 p-4 rounded-lg text-teal-800"></p>
             </div>
             
@@ -127,18 +130,16 @@
     </div>
 
     <script>
-        // Toggle Quantum Input visibility for Round Robin
+     
         document.getElementById('algorithm').addEventListener('change', function() {
             document.getElementById('quantumInput').classList.toggle('hidden', this.value !== '3');
         });
 
-        // Generate input fields for processes
         function generateInputs() {
             const numProcessesInput = document.getElementById('numProcesses');
             const n = parseInt(numProcessesInput.value);
             const processInputs = document.getElementById('processInputs');
 
-            // Validate input
             if (isNaN(n) || n < 1 || n > 10) {
                 alert("Please enter a valid number of processes (1-10).");
                 numProcessesInput.value = 1; // Reset to default
@@ -146,10 +147,10 @@
                 return;
             }
            // TODO: Expand with SJF, RR, and Priority Scheduling
-            // Clear previous inputs
+           
             processInputs.innerHTML = '';
 
-            // Generate new input fields
+        
             for (let i = 0; i < n; i++) {
                 processInputs.innerHTML += `
                     <div class="flex space-x-4 items-center">
@@ -160,10 +161,9 @@
             }
         }
 
-        // Attach event listener to the button
         document.getElementById('generateBtn').addEventListener('click', generateInputs);
 
-        // Calculate simulation (FCFS example)
+   
         function calculate() {
             const algorithm = document.getElementById('algorithm').value;
             const arrivals = Array.from(document.getElementsByClassName('arrival')).map(input => parseInt(input.value) || 0);
@@ -176,13 +176,13 @@
              if (algorithm === "2") {
     alert("SJF placeholder added!");
 }
-            // Validate inputs
+     
             if (bursts.some(b => b <= 0)) {
                 alert("Burst times must be greater than 0!");
                 return;
             }
 
-            // FCFS Implementation
+   
             if (algorithm === "1") {
                 let processes = arrivals.map((arrival, i) => ({
                     id: i + 1,
