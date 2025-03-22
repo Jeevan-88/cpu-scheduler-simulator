@@ -172,7 +172,9 @@
                 alert("Please generate and fill in process details!");
                 return;
             }
-
+             if (algorithm === "2") {
+    alert("SJF placeholder added!");
+}
             // Validate inputs
             if (bursts.some(b => b <= 0)) {
                 alert("Burst times must be greater than 0!");
